@@ -37,6 +37,8 @@
         <button class="primary" type="submit">＋ Adicionar lançamento</button>
         <p id="entryError" class="error" role="alert"></p>
       </form>
+      <button id="newBtn" type="button" class="danger-btn" style="width:100%">Novo (zerar)</button>
+      <button id="undoBtn" type="button" class="secondary hidden" style="width:100%;margin-top:8px">↩ Desfazer o último "Novo"</button>
     </section>
 
     <section class="panel">
@@ -54,6 +56,22 @@
       <span class="eyebrow">FECHAMENTO</span><h2>Resumo de todos os cartões</h2>
       <div id="allCardsSummary" class="summary-list"></div>
       <div class="grand-total"><span>Total geral da família</span><strong id="grandTotal">R$ 0,00</strong></div>
+    </section>
+
+    <section class="panel">
+      <span class="eyebrow">CADASTROS</span><h2>Cartões e pessoas</h2>
+      <form id="cardForm">
+        <label>Novo cartão<input id="newCardName" maxlength="30" placeholder="Ex.: Itaú, C6"></label>
+        <label>De quem é (opcional)<input id="newCardOwner" maxlength="30" placeholder="Ex.: Giovana"></label>
+        <button class="primary" type="submit">＋ Adicionar cartão</button>
+      </form>
+      <div id="cardList" class="manage-list"></div>
+      <form id="personForm" style="margin-top:18px">
+        <label>Nova pessoa<input id="newPersonName" maxlength="30" placeholder="Nome"></label>
+        <button class="primary" type="submit">＋ Adicionar pessoa</button>
+      </form>
+      <div id="personList" class="manage-list"></div>
+      <p id="manageMsg" class="error" role="alert"></p>
     </section>
 
     <section class="panel">
