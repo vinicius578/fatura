@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#123b70">
+  <title>Controle Familiar de Faturas</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Faturas Família">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brandmark">R$</div>
+      <div><h1>Controle Familiar</h1><p>Cartões e faturas da família · funciona sem internet</p></div>
+    </header>
+
+    <section class="panel month-panel">
+      <label for="month">Mês da fatura</label>
+      <input id="month" type="month">
+    </section>
+
+    <section class="panel">
+      <span class="eyebrow">1 · CARTÃO</span><h2>Escolha o cartão</h2>
+      <div id="cardGrid" class="card-grid"></div>
+    </section>
+
+    <section class="panel">
+      <span class="eyebrow">2 · NOVO LANÇAMENTO</span><h2>Adicionar valor</h2>
+      <form id="entryForm" class="entry-form">
+        <label>Nome<select id="person"></select></label>
+        <label>Valor (R$)<input id="amount" inputmode="decimal" placeholder="0,00" required></label>
+        <label>Descrição (opcional)<input id="description" maxlength="100" placeholder="Ex.: mercado, farmácia"></label>
+        <button class="primary" type="submit">＋ Adicionar lançamento</button>
+        <p id="entryError" class="error" role="alert"></p>
+      </form>
+    </section>
+
+    <section class="panel">
+      <span class="eyebrow">3 · CONFERÊNCIA</span><h2 id="selectedCardTitle">Resumo do cartão</h2>
+      <div class="total-card"><span>Total deste cartão</span><strong id="cardTotal">R$ 0,00</strong></div>
+      <div id="personTotals" class="person-totals"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading"><div><span class="eyebrow">4 · MOVIMENTAÇÕES</span><h2>Lançamentos</h2></div><span id="entryCount" class="count">0 itens</span></div>
+      <div id="entriesList" class="entries-list"></div>
+    </section>
+
+    <section class="panel">
+      <span class="eyebrow">FECHAMENTO</span><h2>Resumo de todos os cartões</h2>
+      <div id="allCardsSummary" class="summary-list"></div>
+      <div class="grand-total"><span>Total geral da família</span><strong id="grandTotal">R$ 0,00</strong></div>
+    </section>
+
+    <section class="panel">
+      <span class="eyebrow">BACKUP</span><h2>Salvar e restaurar dados</h2>
+      <p class="footnote" style="text-align:left;padding:0 0 10px">Os dados ficam só neste celular. Copie o backup e guarde no WhatsApp ou nas notas; para restaurar, cole o texto e toque em Restaurar.</p>
+      <div class="tools">
+        <button class="secondary" id="copyBackup" type="button">Copiar backup</button>
+        <button class="secondary" id="restoreBackup" type="button">Restaurar backup</button>
+      </div>
+      <textarea id="backupText" placeholder="Cole aqui o backup para restaurar" spellcheck="false"></textarea>
+      <p id="backupMsg" class="ok" role="status"></p>
+    </section>
+  </main>
+
+  <dialog id="editDialog">
+    <form id="editForm" method="dialog" class="dialog-form">
+      <h2>Editar lançamento</h2>
+      <input id="editId" type="hidden">
+      <label>Nome<select id="editPerson"></select></label>
+      <label>Valor (R$)<input id="editAmount" inputmode="decimal" required></label>
+      <label>Descrição<input id="editDescription" maxlength="100"></label>
+      <div class="dialog-actions"><button type="button" class="secondary" id="cancelEdit">Cancelar</button><button class="primary" type="submit">Salvar</button></div>
+    </form>
+  </dialog>
+  <script src="app.js"></script>
+  <script>if("serviceWorker" in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));</script>
+</body>
+</html>
